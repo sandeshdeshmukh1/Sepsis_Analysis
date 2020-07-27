@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+<script>
+
+{% block jquery %}
+var endpoint = '/api/chart/data/'
+var defaultData1 = []
+var defaultData2 = []
+var defaultData3= []
+var defaultData4 = []
+var defaultData5= []
+var defaultData6 = []
+var defaultData7= []
+var labels = [];
+$.ajax({
+    method: "GET",
+    url: endpoint,
+    success: function(data){
+        labels = data.labels
+        defaultData1 = data.default1
+        defaultData2 = data.default2
+        defaultData3 = data.default3
+        defaultData4 = data.default4
+        defaultData5= data.default5
+        defaultData6 = data.default6
+        defaultData7= data.default7
+        setChart()
+    },
+    error: function(error_data){
+        console.log("error")
+        console.log(error_data)
+    }
+})
+
+function setChart(){
+    var ctx = document.getElementById("myChart");
+    var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: labels,
+        datasets: [{
+            label: '# of Votes',
+            data: defaultData1,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+
+fetch('http://127.0.0.1:8000/api/chart/data/?format=json')
+    .then(response => {
+        return response.json()
+    })
+    .then(data => {
+        // Work with JSON data here
+        console.log(data)
+    })
+    .catch(err => {
+        // Do something for an error here
+    })
+
+
+{% endblock %}
+</script>
+
+{% block content %}
+
+<div class='row'>
+    <div class='col-sm-12'>
+        <h1>Hello World</h1>
+        <div class='col-sm-6'>
+            <canvas id="myChart" width="400" height="400"></canvas>
+        </div>
+
+    </div>
+</div>
+
+{% endblock content %}

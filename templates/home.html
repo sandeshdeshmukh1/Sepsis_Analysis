@@ -1,0 +1,94 @@
+{% extends 'base.html' %} {% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>AI Hackthon</title>
+    <meta charset="utf-8" />
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+    <style></style>
+  </head>
+  <body>
+    {% block content %}
+
+    <div
+      class="figcontainer"
+      style="margin-left:0.2rem;background-size: 100px 100px; margin-top: 7rem; width:50rem;"
+    >
+      <table class="table table-dark" style="width:10rem;">
+        <tbody>
+          <tr>
+            <th>HR</th>
+            {% for i in context.HR %}
+            <td>{{i|floatformat:2 }}</td>
+            {% endfor %}
+          </tr>
+          <tr>
+            <th>TEMP</th>
+            {% for i in context.TEMP %}
+            <td>{{i|floatformat:2 }}</td>
+            {% endfor %}
+          </tr>
+          <tr>
+            <th>WBC</th>
+            {% for i in context.WBC %}
+            <td>{{i|floatformat:2 }}</td>
+            {% endfor %}
+          </tr>
+          <tr>
+            <th>MAP</th>
+            {% for i in context.MAP %}
+            <td>{{i|floatformat:2 }}</td>
+            {% endfor %}
+          </tr>
+          <tr>
+            <th>GENDER</th>
+            {% for i in context.GENDER %}
+            <td>{{i|floatformat:2 }}</td>
+            {% endfor %}
+          </tr>
+          <tr>
+            <th>AGE</th>
+            {% for i in context.AGE %}
+            <td>{{i|floatformat:2 }}</td>
+            {% endfor %}
+          </tr>
+          <tr>
+            <th>first_value</th>
+            {% for i in context.first_value %}
+            <td>{{i|floatformat:2 }}</td>
+            {% endfor %}
+          </tr>
+          <tr>
+            <th>second_value</th>
+            {% for i in context.second_value %}
+            <td>{{i|floatformat:2 }}</td>
+            {% endfor %}
+          </tr>
+        </tbody>
+      </table>
+      <div class="button">
+        <a href="http://127.0.0.1:8000/charts/"
+          ><button
+            class="btn btn-warning"
+            type="submit"
+            name="Submit"
+            style="padding: 10px 10rem 10px 10rem; margin-top: 30px; margin-left:56rem;"
+          >
+            Charts
+          </button></a
+        >
+      </div>
+    </div>
+    {% endblock %}
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

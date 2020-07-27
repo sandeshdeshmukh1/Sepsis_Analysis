@@ -1,0 +1,252 @@
+{% extends 'base.html' %} {% block content %}
+<script>
+  {% block jquery %}
+  var endpoint = '/api/chart/data/'
+  var defaultData1 = []
+  var defaultData2 = []
+  var defaultData3= []
+  var defaultData4 = []
+  var defaultData5 = []
+  var defaultData8 = []
+  var defaultData9= []
+  var labels = [];
+  $.ajax({
+      method: "GET",
+      url: endpoint,
+      success: function(data){
+          labels = data.labels
+          defaultData1 = data.default1
+          defaultData2 = data.default2
+          defaultData3 = data.default3
+          defaultData4 = data.default4
+          defaultData5 = data.default5
+          defaultData8 = data.default8
+          defaultData9= data.default9
+          setChart()
+      },
+
+      error: function(error_data){
+          console.log("error")
+          console.log(error_data)
+      }
+  })
+</script>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-8 ">
+      <div class="row">
+        <div
+          class="col-md-6"
+          style="margin: 5px;  background-color:#f5f7f6 ; width: 100vw; "
+        >
+          <canvas id="line-chart1" width="100" height="230"></canvas>
+        </div>
+        <div
+          class="col-md-5"
+          style="margin: 5px; margin-left: 10px;  background-color:#f5f7f6 ; width: 100vw; "
+        >
+          <canvas id="line-chart2" width="100" height="230"></canvas>
+        </div>
+      </div>
+
+      <div class="row">
+        <div
+          class="col-md-6 "
+          style="margin: 5px;  background-color:#f5f7f6 ; width: 100vw; "
+        >
+          <canvas id="line-chart3" width="100" height="230"></canvas>
+        </div>
+        <div
+          class="col-md-5 "
+          style="margin: 5px;  background-color:#f5f7f6 ; width: 100vw; "
+        >
+          <canvas id="line-chart4" width="100" height="230"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+        <div class="row">
+            <div
+              class="col-md-11"
+              style="margin: 3px; background-color: #f5f7f6; width: 100vw; "
+            >
+              <canvas id="line-chart5" width="100" height="240"></canvas>
+            </div>
+        </div>
+        <div class="row">
+          <div
+            class="col-md-11"
+            style="margin: 3px; background-color: #f5f7f6; width: 100vw; "
+          >
+            <canvas id="line-chart6" width="100" height="240"></canvas>
+          </div>
+      </div>
+
+    </div>
+     
+    </div>
+  </div>
+
+  <a href="http://127.0.0.1:8000/email/"
+    ><button
+      type="button"
+      class="btn btn-warning"
+      style="padding: 10px 10rem 10px 10rem; margin-top: 10px; margin-left:56rem;"
+    >
+      Email
+    </button></a
+  >
+</div>
+
+<script>
+  function setChart() {
+    new Chart(document.getElementById("line-chart1"), {
+      type: "line",
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            data: defaultData1,
+            label: "Heart Rate",
+            borderColor: "#3e95cd",
+            pointBackgroundColor:"#fff",
+            fill: false,
+            lineTension:0.1
+          }
+        ]
+      },
+      options: {
+        maintainAspectRatio: false,
+        title: {
+          display: true,
+          text: "Heart Rate"
+        }
+      }
+    });
+    new Chart(document.getElementById("line-chart2"), {
+      type: "line",
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            data: defaultData2,
+            label: "Temperature",
+            borderColor: "#8e5ea2",
+            pointBackgroundColor:"#fff",
+            fill: false,
+            lineTension:0.1          
+            }
+        ]
+      },
+      options: {
+        maintainAspectRatio: false,
+        title: {
+          display: true,
+          text: "Temperature"
+        }
+      }
+    });
+    new Chart(document.getElementById("line-chart3"), {
+      type: "line",
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            data: defaultData3,
+            label: "Respiratory",
+            borderColor: "#3cba9f",
+            pointBackgroundColor:"#fff",
+            fill: false,
+            lineTension:0.1          }
+        ]
+      },
+      options: {
+        maintainAspectRatio: false,
+        title: {
+          display: true,
+          text: "Respiratory"
+        }
+      }
+    });
+    new Chart(document.getElementById("line-chart4"), {
+      type: "line",
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            data: defaultData4,
+            label: "WBC",
+            borderColor: "#e8c3b9",
+            pointBackgroundColor:"#fff",
+            fill: false,
+            lineTension:0.1        
+          }
+        ]
+      },
+      options: {
+        maintainAspectRatio: false,
+        title: {
+          display: true,
+          text: "WBC"
+        }
+      }
+    });
+
+    new Chart(document.getElementById("line-chart6"), {
+      type: "line",
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            data: defaultData5,
+            label: "MAP",
+            borderColor: "#e8c3b9",
+            pointBackgroundColor:"#fff",
+            fill: false,
+            lineTension:0.1        
+          }
+        ]
+      },
+      options: {
+        maintainAspectRatio: false,
+        title: {
+          display: true,
+          text: "MAP"
+        }
+      }
+    });
+    //
+    new Chart(document.getElementById("line-chart5"), {
+      type: "line",
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            data: defaultData8,
+            label: "Sepsis",
+            borderColor: "#3e95cd",
+            pointBackgroundColor:"#fff",
+            fill: false,
+            lineTension:0.1         
+          },
+          {
+            data: defaultData9,
+            label: "NO-Sepsis",
+            borderColor: "#8e5ea2",
+            pointBackgroundColor:"#fff",
+            fill: false,
+            lineTension:0.1          
+            }
+        ]
+      },
+      options: {
+        maintainAspectRatio: false,
+        title: {
+          display: true,
+          text: "Sepsis"
+        }
+      }
+    });
+  }
+</script>
+{% endblock %} {% endblock content %}

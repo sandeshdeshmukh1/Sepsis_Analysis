@@ -1,0 +1,170 @@
+{% extends 'base.html' %}
+{% block content %}
+  <script>
+   {% block jquery %}
+   var endpoint = '/api/chart/data/'
+   var defaultData1 = []
+   var defaultData2 = []
+   var defaultData3= []
+   var defaultData4 = []
+   // var defaultData8 = []
+   // var defaultData9= []
+   var labels = [];
+   $.ajax({
+       method: "GET",
+       url: endpoint,
+       success: function(data){
+           labels = data.labels
+           defaultData1 = data.default1
+           defaultData2 = data.default2
+           defaultData3 = data.default3
+           defaultData4 = data.default4
+           // defaultData8 = data.default8
+           // defaultData9= data.default9
+           setChart()
+       },
+
+       error: function(error_data){
+           console.log("error")
+           console.log(error_data)
+       }
+   })
+
+
+ </script>
+ <div class="container" style="padding:8rem; margin-top:-10rem;">
+	 <div class="row">
+	   <div class="col-md-12">
+	     <div class="col-md-6">
+	       <canvas id="line-chart1" width="200" height="150"></canvas>
+	     </div>
+	     <div class="col-md-6">
+	       <canvas id="line-chart2" width="200" height="150"></canvas>
+	     </div>
+	   </div>
+	 </div>
+	 <div class="row">
+	   <div class="col-md-12">
+	     <div class="col-md-6">
+	       <canvas id="line-chart3" width="200" height="150"></canvas>
+	     </div>
+	     <div class="col-md-6">
+	       <canvas id="line-chart4" width="200" height="150"></canvas>
+	     </div>
+	   </div>
+	 </div>
+ </div>
+
+
+
+
+  <script>
+    function setChart(){
+      new Chart(document.getElementById("line-chart1"), {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [{
+            data: defaultData1,
+            label: "Heart Rate",
+            borderColor: "#3e95cd",
+            fill: false
+          }
+        ]
+      },
+      options: {
+        title: {
+          display: true,
+          text: 'Heart Rate'
+        }
+      }
+    });
+		new Chart(document.getElementById("line-chart2"), {
+		type: 'line',
+		data: {
+			labels: labels,
+			datasets: [{
+					data: defaultData2,
+					label: "Temperature",
+					borderColor: "#8e5ea2",
+					fill: false
+				}
+			]
+		},
+		options: {
+			title: {
+				display: true,
+				text: 'Temperature'
+			}
+		}
+	});
+	new Chart(document.getElementById("line-chart3"), {
+	type: 'line',
+	data: {
+		labels: labels,
+		datasets: [{
+				data: defaultData3,
+				label: "Respiratory",
+				borderColor: "#3cba9f",
+				fill: false
+			}
+		]
+	},
+	options: {
+		title: {
+			display: true,
+			text: 'Respiratory'
+		}
+	}
+});
+new Chart(document.getElementById("line-chart4"), {
+type: 'line',
+data: {
+	labels: labels,
+	datasets: [{
+			data: defaultData4,
+			label: "WBC",
+			borderColor: "#e8c3b9",
+			fill: false
+		}
+	]
+},
+options: {
+	title: {
+		display: true,
+		text: 'WBC'
+	}
+}
+});
+	//
+  //     new Chart(document.getElementById("sepsis-chart"), {
+  //     type: 'line',
+  //     data: {
+  //         labels: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],
+  //         datasets: [{
+  //           data: defaultData8,
+  //           label: "Y1",
+  //           borderColor: "#3e95cd",
+  //           fill: false
+  //         }, {
+  //           data: defaultData9,
+  //           label: "Y2",
+  //           borderColor: "#8e5ea2",
+  //           fill: false
+  //         },
+	//
+  //         ]
+  //     },
+  //     options: {
+  //       title: {
+  //         display: true,
+  //         text: 'Sepsis'
+  //       }
+  //     }
+  // });
+
+  }
+  </script>
+  {% endblock %}
+
+{% endblock content %}

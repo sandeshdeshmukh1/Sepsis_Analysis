@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <style>
+
+  </style>
+    <body>
+    {% block content %}
+    <div class="main" style="background-image: url('https://unsplash.com/photos/egT3xtDu9DQ');">
+      <div class="col-md-12">
+        <div class="col-md-3">
+          <div class="jumbotron">
+            <div class="button-set">
+              <h3 class="legend">
+                Upload file
+              </h3>
+
+                <img src="https://res.cloudinary.com/dtutqsucw/image/upload/v1438955603/file-upload-01.png" alt="upload-file" />
+                </br>
+
+                <p class="file-type-desc">( <font color="red">*</font>file extension allowed: <strong>.psv )</p>
+
+                  <form method="POST" action="/charts/">
+                      {% csrf_token %}
+                        <input type="file" accept=".psv" name="myfile"/>
+                        <button class="btn btn-success" type="submit" name="Submit" style="padding: 10px 10rem 10px 10rem; margin-top: 60px;">Predict</button>
+                  </form>
+                    {% if uploaded_file_url %}
+                      <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
+                    {% endif %}
+
+            </div>
+          </div>
+
+        </div>
+        <div class="col-md-9">
+          <div class="jumbotron">
+            <h1 class="display-4">Sepsis Analysis</h1>
+            <p class="lead">Sepsis is a potentially life-threatening condition caused by the body's response to an infection.</p>
+            <hr class="my-4">
+            <p>There are more than 1.5 million cases of sepsis each year, according to the Centers for Disease Control and Prevention (CDC)Trusted Source. This type of infection kills more than 250,000 Americans a year.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+  {% endblock %}
+
+  </body>
+</html>
